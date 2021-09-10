@@ -7,7 +7,7 @@ namespace MartianRobotTest
     public class MartianRobotShould
     {
         [TestMethod]
-        public void WhenStartsOrientationIsNorthThenTurnRightWhenReceiveRightInstruction()
+        public void TurnRightWhenReceiveRightInstruction()
         {
             //arrange
             MartianRobotEngine robot = new MartianRobotEngine("N");
