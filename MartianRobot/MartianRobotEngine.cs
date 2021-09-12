@@ -37,7 +37,7 @@ namespace MartianRobot
 
         public void TurnLeft()
         {
-            _orientation = orientationTypes.W;
+            _orientation = GetPrevious(_orientation);
         }
 
         public string GetOrientation()
@@ -65,6 +65,15 @@ namespace MartianRobot
             return nextOrientation;
         }
 
+        private orientationTypes GetPrevious(orientationTypes currentOrientation)
+        {
+            orientationTypes nextOrientation = currentOrientation - 1;
+            if (nextOrientation < orientationTypes.N)
+            {
+                nextOrientation = orientationTypes.W;
+            }
+            return nextOrientation;
+        }
 
         #endregion
     }
