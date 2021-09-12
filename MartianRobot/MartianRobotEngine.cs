@@ -18,14 +18,25 @@ namespace MartianRobot
         };
 
         private orientationTypes _orientation;
+        private string _position = string.Empty;
 
 
         #endregion
 
         #region Constructor
         public MartianRobotEngine(string orientation)
-        {
-            _orientation = ParseOrientation(orientation);
+        {            
+            string[] inputs = orientation.Split(" ");
+            foreach(string s in inputs)
+            {
+                if(Char.IsLetter(s[0]))
+                {
+                    _orientation = ParseOrientation(orientation);
+                }
+            }
+            _position = "1 1";
+
+
         }
         #endregion
 
@@ -43,6 +54,11 @@ namespace MartianRobot
         public string GetOrientation()
         {
             return Enum.GetName(_orientation);
+        }
+
+        public string GetPosition()
+        {
+            return _position;
         }
         #endregion
 

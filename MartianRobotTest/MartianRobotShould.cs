@@ -32,5 +32,16 @@ namespace MartianRobotTest
             Assert.AreEqual(expected, result);
         }
 
+        [TestMethod]
+        public void WhenSettingInitialPositionThenReturnSamePosition()
+        {
+            //arrange
+            MartianRobotEngine robot = new MartianRobotEngine("1 1 N");
+            var expected = "1 1";
+            //act
+            var result = robot.GetPosition();
+            //assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }
