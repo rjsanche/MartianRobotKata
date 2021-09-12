@@ -18,13 +18,7 @@ namespace MartianRobot
         };
 
         private orientationTypes _orientation;
-        private List<Tuple<string, orientationTypes>> _orientationParser = new List<Tuple<string, orientationTypes>>
-        {
-            new Tuple<string, orientationTypes>("N", orientationTypes.N),
-            new Tuple<string, orientationTypes>("E", orientationTypes.E),
-            new Tuple<string, orientationTypes>("S", orientationTypes.S),
-            new Tuple<string, orientationTypes>("W", orientationTypes.W)
-        };
+
 
         #endregion
 
@@ -39,6 +33,11 @@ namespace MartianRobot
         public void TurnRight()
         {
             _orientation = GetNext(_orientation);
+        }
+
+        public void TurnLeft()
+        {
+            _orientation = orientationTypes.W;
         }
 
         public string GetOrientation()
@@ -65,6 +64,8 @@ namespace MartianRobot
             }
             return nextOrientation;
         }
+
+
         #endregion
     }
 }

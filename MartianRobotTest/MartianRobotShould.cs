@@ -19,7 +19,18 @@ namespace MartianRobotTest
             Assert.AreEqual(expected, result);
         }
 
-
+        [TestMethod]
+        public void TurnLeftWhenReceiveLeftInstruction()
+        {
+            //arrange
+            MartianRobotEngine robot = new MartianRobotEngine("N");
+            var expected = "W";
+            //act
+            robot.TurnLeft();
+            var result = robot.GetOrientation();
+            //assert
+            Assert.AreEqual(expected, result);
+        }
 
     }
 }
