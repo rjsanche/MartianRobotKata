@@ -17,59 +17,43 @@ namespace MartianRobot
             Unknown
         };
 
-        private orientationTypes _orientation;
-        private string _position = string.Empty;
-
+        private Position _position;
 
         #endregion
 
         #region Constructor
-        public MartianRobotEngine(string orientation)
-        {            
-            string[] inputs = orientation.Split(" ");
-            foreach(string s in inputs)
-            {
-                if(Char.IsLetter(s[0]))
-                {
-                    _orientation = ParseOrientation(orientation);
-                }
-            }
-            _position = "1 1";
-
-
+        public MartianRobotEngine(string input)
+        {
+            _position = InputsParser.ParsePosition(input);
         }
+
         #endregion
 
         #region Public methods
         public void TurnRight()
         {
-            _orientation = GetNext(_orientation);
+            _position.orientation = GetNext(_position.orientation);
         }
 
         public void TurnLeft()
         {
-            _orientation = GetPrevious(_orientation);
+            _position.orientation = GetPrevious(_position.orientation);
         }
 
         public string GetOrientation()
         {
-            return Enum.GetName(_orientation);
+            return Enum.GetName(_position.orientation);
         }
 
         public string GetPosition()
         {
-            return _position;
+            return string.Format("{0} {1}",_position.x, _position.y);
         }
         #endregion
 
         #region Private
 
-        private orientationTypes ParseOrientation(string orientation)
-        {
-            orientationTypes result = orientationTypes.Unknown;
-            Enum.TryParse<orientationTypes>(orientation, true, out result);
-            return result;
-        }
+
 
         private orientationTypes GetNext(orientationTypes currentOrientation)
         {            
