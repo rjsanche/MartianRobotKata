@@ -201,10 +201,25 @@ namespace MartianRobotTest
             //act
             var position = robot.GetPosition();
             var orientation = robot.GetOrientation();
-            var lostValue = robot.GetLostValue();
             //assert
             Assert.AreEqual(expectedPosition, position);
             Assert.AreEqual(expectedOrientation, orientation);
+
+        }
+
+        [TestMethod]
+        public void WhenSetPositionMaximuValueIs50Then50isSet()
+        {
+            //arrange
+            MartianRobotEngine robot = new MartianRobotEngine();
+            var expectedPosition = "50 50";
+
+            robot.SetGridBounds("51 51");
+            robot.SetInitialPosition("51 51 W");            
+            //act
+            var position = robot.GetPosition();
+            //assert
+            Assert.AreEqual(expectedPosition, position);
 
         }
     }

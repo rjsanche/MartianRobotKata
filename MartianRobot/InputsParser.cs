@@ -75,7 +75,7 @@ namespace MartianRobot
         }
 
         private static void GetPosition(bool firstPosition, ref int x_position, ref int y_position, string s)
-        {
+        {            
             if (firstPosition)
             {
                 x_position = int.Parse(s);
@@ -83,6 +83,14 @@ namespace MartianRobot
             else
             {
                 y_position = int.Parse(s);
+            }
+            if (x_position > 50)
+            {
+                x_position = 50;
+            }
+            if (y_position > 50)
+            {
+                y_position = 50;
             }
         }
     }
