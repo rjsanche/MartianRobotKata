@@ -35,6 +35,7 @@ namespace MartianRobot
         {
             _commandsDictionary = new Dictionary<instructionTypes, ICommand>();
             _commandsDictionary.Add(instructionTypes.F, new ForwardCommand());
+            _commandsDictionary.Add(instructionTypes.L, new LeftCommand());
 
         }
 
@@ -63,11 +64,6 @@ namespace MartianRobot
             _position.orientation = GetNext(_position.orientation);
         }
 
-        public void TurnLeft()
-        {
-            _position.orientation = GetPrevious(_position.orientation);
-        }
-
         public string GetOrientation()
         {
             return Enum.GetName(_position.orientation);
@@ -93,15 +89,7 @@ namespace MartianRobot
             return nextOrientation;
         }
 
-        private orientationTypes GetPrevious(orientationTypes currentOrientation)
-        {
-            orientationTypes nextOrientation = currentOrientation - 1;
-            if (nextOrientation < orientationTypes.N)
-            {
-                nextOrientation = orientationTypes.W;
-            }
-            return nextOrientation;
-        }
+
 
         #endregion
     }

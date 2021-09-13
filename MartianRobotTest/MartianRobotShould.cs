@@ -28,7 +28,7 @@ namespace MartianRobotTest
             var expected = "W";
             robot.SetInitialPosition("N");
             //act
-            robot.TurnLeft();
+            robot.ProcessCommands("L");
             var result = robot.GetOrientation();
             //assert
             Assert.AreEqual(expected, result);
