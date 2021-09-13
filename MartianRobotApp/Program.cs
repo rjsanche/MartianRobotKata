@@ -33,17 +33,24 @@ namespace MartianRobotApp
             Console.WriteLine("Receive following otuput:");
             Console.WriteLine("\t4 2 N");
             Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("Enter grid bounds and press enter key:");
             string gridCoordinates = Console.ReadLine();
             MartianRobotEngine robot = new MartianRobotEngine();
+            int robots = 1;
+            int lost = 0;
             robot.SetGridBounds(gridCoordinates);
             while (true)
             {
+                Console.WriteLine($"{robots} used robots ; {lost} robots LOST");
+                Console.WriteLine("Initial position, press enter key");
                 string initialPosition = Console.ReadLine();
+                Console.WriteLine("Instructions, press enter key");
                 string instructions = Console.ReadLine();
                 robot.SetInitialPosition(initialPosition);
                 robot.ProcessCommands(instructions);
-                Console.WriteLine($"{robot.GetPosition()} {robot.GetOrientation()} {robot.GetLostValue()}");
+                string lostResult = robot.GetLostValue();
+                lost = lostResult == String.Empty ? lost : lost + 1; 
+                Console.WriteLine($"{robot.GetPosition()} {robot.GetOrientation()} {lostResult}");
             }
 
         }
