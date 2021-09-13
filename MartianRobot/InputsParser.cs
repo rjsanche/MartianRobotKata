@@ -39,10 +39,32 @@ namespace MartianRobot
             return new Position() { x = x_position, y = y_position, orientation = orientation };
         }
 
+        public static Queue<instructionTypes> ParseCommands(string instructions)
+        {
+            Queue<instructionTypes> commands = new Queue<instructionTypes>();
+            foreach(char c in instructions)
+            {
+                instructionTypes command = ParseCommad(c);
+                if(command != instructionTypes.Unknown)
+                {
+                    commands.Enqueue(command);
+                }
+            }
+            return commands;
+        }
+
+
         private static orientationTypes ParseOrientation(string orientation)
         {
             orientationTypes result = orientationTypes.Unknown;
             Enum.TryParse<orientationTypes>(orientation, true, out result);
+            return result;
+        }
+
+        private static instructionTypes ParseCommad(char command)
+        {
+            instructionTypes result = instructionTypes.Unknown;
+            Enum.TryParse<instructionTypes>(command.ToString(), out result);
             return result;
         }
     }

@@ -17,19 +17,37 @@ namespace MartianRobot
             Unknown
         };
 
+        public enum instructionTypes
+        {
+            R,
+            L,
+            F,            
+            Unknown
+        };
+
         private Position _position;
 
         #endregion
 
-        #region Constructor
-        public MartianRobotEngine(string input)
+        #region Public methods
+
+        public void SetInitialPosition(string s)
         {
-            _position = InputsParser.ParsePosition(input);
+            _position = InputsParser.ParsePosition(s);
         }
 
-        #endregion
+        public void ProcessCommands(string s)
+        {
+            Queue<instructionTypes> commands = InputsParser.ParseCommands(s);
+            while (commands.Count > 0)
+            {
+                if (commands.Dequeue() == instructionTypes.F)
+                {
+                    _position.x = _position.x + 1;
+                }
+            }
+        }
 
-        #region Public methods
         public void TurnRight()
         {
             _position.orientation = GetNext(_position.orientation);
