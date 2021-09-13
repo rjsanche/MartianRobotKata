@@ -8,6 +8,6 @@ namespace MartianRobot
 {
     public interface ICommand
     {
-        Position Execute(Position position);
+        Position Execute(Position position, int x_max, int y_max);
     }
 }

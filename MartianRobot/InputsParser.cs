@@ -24,19 +24,12 @@ namespace MartianRobot
                 }
                 else
                 {
-                    if (firstPosition)
-                    {
-                        x_position = int.Parse(s);
-                    }
-                    else
-                    {
-                        y_position = int.Parse(s);
-                    }
+                    GetPosition(firstPosition, ref x_position, ref y_position, s);
                     firstPosition = !firstPosition;
                 }
 
             }
-            return new Position() { x = x_position, y = y_position, orientation = orientation };
+            return new Position() { x = x_position, y = y_position, orientation = orientation, Lost = false };
         }
 
         public static Queue<instructionTypes> ParseCommands(string instructions)
@@ -66,6 +59,18 @@ namespace MartianRobot
             instructionTypes result = instructionTypes.Unknown;
             Enum.TryParse<instructionTypes>(command.ToString(), out result);
             return result;
+        }
+
+        private static void GetPosition(bool firstPosition, ref int x_position, ref int y_position, string s)
+        {
+            if (firstPosition)
+            {
+                x_position = int.Parse(s);
+            }
+            else
+            {
+                y_position = int.Parse(s);
+            }
         }
     }
 }

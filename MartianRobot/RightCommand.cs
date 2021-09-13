@@ -7,9 +7,9 @@ using static MartianRobot.MartianRobotEngine;
 
 namespace MartianRobot
 {
-    public class RightCommand : ICommand
+    public class RightCommand : BaseCommand, ICommand 
     {
-        public Position Execute(Position position)
+        protected override Position ExecuteCommand(Position position)
         {
             position.orientation = GetNext(position.orientation);
             return position;

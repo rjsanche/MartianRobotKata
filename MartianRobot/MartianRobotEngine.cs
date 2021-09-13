@@ -40,7 +40,8 @@ namespace MartianRobot
             _commandsDictionary.Add(instructionTypes.F, new ForwardCommand());
             _commandsDictionary.Add(instructionTypes.L, new LeftCommand());
             _commandsDictionary.Add(instructionTypes.R, new RightCommand());
-
+            x_max = 5;
+            y_max = 3;
 
         }
 
@@ -59,10 +60,14 @@ namespace MartianRobot
                 instructionTypes nextCommand = commands.Dequeue();
                 if (_commandsDictionary.ContainsKey(nextCommand))
                 {
-                    _position = _commandsDictionary[nextCommand].Execute(_position);
+                    _position = _commandsDictionary[nextCommand].Execute(_position, x_max, y_max);
+                }
+                if(_position.Lost)
+                {
+                    return;
                 }
             }
-        }  
+        }
 
         public string GetOrientation()
         {
@@ -88,10 +93,6 @@ namespace MartianRobot
         #endregion
 
         #region Private
-
-
-
-
 
 
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MartianRobot
 {
-    public class ForwardCommand : ICommand
+    public class ForwardCommand : BaseCommand, ICommand
     {
         private Dictionary<MartianRobotEngine.orientationTypes, Func<Position, Position>> _orientationPosition;
         public ForwardCommand()
@@ -19,7 +19,7 @@ namespace MartianRobot
             _orientationPosition.Add(MartianRobotEngine.orientationTypes.W, DecrementX);
         }
 
-        public Position Execute(Position position)
+        protected override Position ExecuteCommand(Position position)
         {
             if(_orientationPosition.ContainsKey(position.orientation))
             {

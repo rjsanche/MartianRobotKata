@@ -14,5 +14,7 @@ namespace MartianRobot
         public int y { get; set; }
 
         public orientationTypes orientation { get; set; }
+
+        public bool Lost { get; set; }
     }
 }
