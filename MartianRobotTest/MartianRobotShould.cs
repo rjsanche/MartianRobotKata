@@ -187,7 +187,26 @@ namespace MartianRobotTest
 
         }
 
+        [TestMethod]
+        public void WhenReceiveSeveralInstructionsGet4_2_N_position()
+        {
+            //arrange
+            MartianRobotEngine robot = new MartianRobotEngine();
+            var expectedPosition = "4 2";
+            var expectedOrientation = "N";
+            
+            robot.SetGridBounds("5 3");
+            robot.SetInitialPosition("0 3 W");
+            robot.ProcessCommands("LLFFFRFLFL");
+            //act
+            var position = robot.GetPosition();
+            var orientation = robot.GetOrientation();
+            var lostValue = robot.GetLostValue();
+            //assert
+            Assert.AreEqual(expectedPosition, position);
+            Assert.AreEqual(expectedOrientation, orientation);
 
+        }
     }
 
 }
