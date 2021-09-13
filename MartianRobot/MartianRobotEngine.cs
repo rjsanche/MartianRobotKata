@@ -29,6 +29,9 @@ namespace MartianRobot
 
         private Dictionary<instructionTypes, ICommand> _commandsDictionary;
 
+        private int x_max;
+        private int y_max;
+
         #endregion
 
         public MartianRobotEngine()
@@ -70,6 +73,18 @@ namespace MartianRobot
         {
             return string.Format("{0} {1}",_position.x, _position.y);
         }
+
+        public void SetGridBounds(string s)
+        {
+            x_max = 5;
+            y_max = 3;
+        }
+
+        public string GetLostValue()
+        {
+            return "LOST";
+        }
+
         #endregion
 
         #region Private

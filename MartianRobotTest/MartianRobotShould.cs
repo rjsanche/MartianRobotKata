@@ -164,5 +164,28 @@ namespace MartianRobotTest
             Assert.AreEqual(expectedOrientation, orientation);
 
         }
+
+        [TestMethod]
+        public void WhenReceiveSeveralInstructionsGetLost()
+        {
+            //arrange
+            MartianRobotEngine robot = new MartianRobotEngine();
+            var expectedPosition = "3 3";
+            var expectedOrientation = "N";
+            var expectedLostValue = "LOST";
+            robot.SetGridBounds("5 3");
+            robot.SetInitialPosition("3 2 N");
+            robot.ProcessCommands("FRRFLLFFRRFLL");
+            //act
+            var position = robot.GetPosition();
+            var orientation = robot.GetOrientation();
+            var lostValue = robot.GetLostValue();
+            //assert
+            Assert.AreEqual(expectedPosition, position);
+            Assert.AreEqual(expectedOrientation, orientation);
+            Assert.AreEqual(expectedLostValue, lostValue);
+
+        }
     }
+
 }
