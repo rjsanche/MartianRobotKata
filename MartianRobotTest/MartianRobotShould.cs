@@ -43,5 +43,18 @@ namespace MartianRobotTest
             //assert
             Assert.AreEqual(expected, result);
         }
+
+
+        [TestMethod]
+        public void WhenSettingInitialOrientationThenReturnSameOrientation()
+        {
+            //arrange
+            MartianRobotEngine robot = new MartianRobotEngine("1 1 N");
+            var expected = "N";
+            //act
+            var result = robot.GetOrientation();
+            //assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }
