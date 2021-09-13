@@ -135,7 +135,7 @@ namespace MartianRobotTest
             //arrange
             MartianRobotEngine robot = new MartianRobotEngine();
             var expectedPosition = "0 0";
-            var expectedOrientation = "S";
+            var expectedOrientation = "W";
             robot.SetInitialPosition("1 1 E");
             robot.ProcessCommands("RFRF");
             //act
