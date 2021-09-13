@@ -33,6 +33,7 @@ namespace MartianRobot
         private int y_max;
         private const string LOST_STR = "LOST";
         private const int MAX_BOUND = 50;
+        private const int MAX_COMMANDS = 100;
 
         #endregion
 
@@ -59,7 +60,8 @@ namespace MartianRobot
         public void ProcessCommands(string s)
         {
             Queue<instructionTypes> commands = InputsParser.ParseCommands(s);
-            while (commands.Count > 0)
+            int num_commands = 0;
+            while (commands.Count > 0 && num_commands < MAX_COMMANDS)
             {
                 instructionTypes nextCommand = commands.Dequeue();
                 if (_commandsDictionary.ContainsKey(nextCommand))
@@ -70,6 +72,7 @@ namespace MartianRobot
                 {
                     return;
                 }
+                num_commands++;
             }
         }
 

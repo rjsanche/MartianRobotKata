@@ -1,5 +1,6 @@
 using MartianRobot;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text;
 
 namespace MartianRobotTest
 {
@@ -216,6 +217,33 @@ namespace MartianRobotTest
 
             robot.SetGridBounds("51 51");
             robot.SetInitialPosition("51 51 W");            
+            //act
+            var position = robot.GetPosition();
+            //assert
+            Assert.AreEqual(expectedPosition, position);
+
+        }
+
+        [TestMethod]
+        public void WhenInstructionsReceiveThenShouldBeLessThan100CharactersLength()
+        {
+            //arrange
+            MartianRobotEngine robot = new MartianRobotEngine();
+            var expectedPosition = "50 49";
+
+            robot.SetGridBounds("50 50");
+            robot.SetInitialPosition("0 0 E");
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 50; i++)
+            {
+                sb.Append("F");
+            }
+            sb.Append("L");
+            for (int i = 0; i < 50; i++)
+            {
+                sb.Append("F");
+            }
+            robot.ProcessCommands(sb.ToString());
             //act
             var position = robot.GetPosition();
             //assert
