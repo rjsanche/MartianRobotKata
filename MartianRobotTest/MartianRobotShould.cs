@@ -128,5 +128,23 @@ namespace MartianRobotTest
             Assert.AreEqual(expectedOrientation, orientation);
 
         }
+
+        [TestMethod]
+        public void WhenReceiveR_F_R_F_InstructionsAndOrientationEastThenGoTo_0_0_Position()
+        {
+            //arrange
+            MartianRobotEngine robot = new MartianRobotEngine();
+            var expectedPosition = "0 0";
+            var expectedOrientation = "S";
+            robot.SetInitialPosition("1 1 E");
+            robot.ProcessCommands("RFRF");
+            //act
+            var position = robot.GetPosition();
+            var orientation = robot.GetOrientation();
+            //assert
+            Assert.AreEqual(expectedPosition, position);
+            Assert.AreEqual(expectedOrientation, orientation);
+
+        }
     }
 }

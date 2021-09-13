@@ -16,7 +16,7 @@ namespace MartianRobot
             _orientationPosition.Add(MartianRobotEngine.orientationTypes.N, IncrementY);
             _orientationPosition.Add(MartianRobotEngine.orientationTypes.S, DecrementY);
             _orientationPosition.Add(MartianRobotEngine.orientationTypes.E, IncrementX);
-            _orientationPosition.Add(MartianRobotEngine.orientationTypes.W, DecrementY);
+            _orientationPosition.Add(MartianRobotEngine.orientationTypes.W, DecrementX);
         }
 
         public Position Execute(Position position)
