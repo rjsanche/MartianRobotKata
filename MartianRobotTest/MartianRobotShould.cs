@@ -250,6 +250,22 @@ namespace MartianRobotTest
             Assert.AreEqual(expectedPosition, position);
 
         }
+
+        [TestMethod]
+        public void WhenInitialPositionOutSideGridReturnMaxGrid()
+        {
+            //arrange
+            MartianRobotEngine robot = new MartianRobotEngine();
+            var expectedPosition = "5 3";
+
+            robot.SetGridBounds("5 3");
+            robot.SetInitialPosition("6 4 E");
+            //act
+            var position = robot.GetPosition();
+            //assert
+            Assert.AreEqual(expectedPosition, position);
+
+        }
     }
 
 }
