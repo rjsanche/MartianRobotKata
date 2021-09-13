@@ -8,22 +8,50 @@ namespace MartianRobot
 {
     public class ForwardCommand : ICommand
     {
+        private Dictionary<MartianRobotEngine.orientationTypes, Func<Position, Position>> _orientationPosition;
         public ForwardCommand()
         {
-            
+            _orientationPosition = new Dictionary<MartianRobotEngine.orientationTypes, Func<Position, Position>>();
+
+            _orientationPosition.Add(MartianRobotEngine.orientationTypes.N, IncrementY);
+            _orientationPosition.Add(MartianRobotEngine.orientationTypes.S, DecrementY);
+            _orientationPosition.Add(MartianRobotEngine.orientationTypes.E, IncrementX);
+            _orientationPosition.Add(MartianRobotEngine.orientationTypes.W, DecrementY);
         }
 
         public Position Execute(Position position)
         {
-            if (position.orientation == MartianRobotEngine.orientationTypes.E)
+            if(_orientationPosition.ContainsKey(position.orientation))
             {
-                position.x = position.x + 1;
-            }
-            else if(position.orientation == MartianRobotEngine.orientationTypes.N)
-            {
-                position.y = position.y + 1;
+                return _orientationPosition[position.orientation](position);
             }
             return position;
         }
+
+        private Position IncrementY(Position position)
+        {
+            position.y +=  1;
+            return position;
+        }
+
+        private Position DecrementY(Position position)
+        {
+            position.y -= 1;
+            return position;
+        }
+
+        private Position IncrementX(Position position)
+        {
+            position.x += 1;
+            return position;
+        }
+
+        private Position DecrementX(Position position)
+        {
+            position.x -= 1;
+            return position;
+        }
+
+
     }
 }

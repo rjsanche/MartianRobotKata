@@ -36,6 +36,8 @@ namespace MartianRobot
             _commandsDictionary = new Dictionary<instructionTypes, ICommand>();
             _commandsDictionary.Add(instructionTypes.F, new ForwardCommand());
             _commandsDictionary.Add(instructionTypes.L, new LeftCommand());
+            _commandsDictionary.Add(instructionTypes.R, new RightCommand());
+
 
         }
 
@@ -47,22 +49,17 @@ namespace MartianRobot
         }
 
         public void ProcessCommands(string s)
-        {            
+        {
             Queue<instructionTypes> commands = InputsParser.ParseCommands(s);
             while (commands.Count > 0)
             {
                 instructionTypes nextCommand = commands.Dequeue();
-                if(_commandsDictionary.ContainsKey(nextCommand))
+                if (_commandsDictionary.ContainsKey(nextCommand))
                 {
                     _position = _commandsDictionary[nextCommand].Execute(_position);
                 }
             }
-        }
-
-        public void TurnRight()
-        {
-            _position.orientation = GetNext(_position.orientation);
-        }
+        }  
 
         public string GetOrientation()
         {
@@ -79,15 +76,7 @@ namespace MartianRobot
 
 
 
-        private orientationTypes GetNext(orientationTypes currentOrientation)
-        {            
-            orientationTypes nextOrientation = currentOrientation + 1;            
-            if(nextOrientation == orientationTypes.Unknown)
-            {
-                nextOrientation = orientationTypes.N;
-            }
-            return nextOrientation;
-        }
+
 
 
 
