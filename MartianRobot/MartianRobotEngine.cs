@@ -81,13 +81,16 @@ namespace MartianRobot
 
         public void SetGridBounds(string s)
         {
-            x_max = 5;
-            y_max = 3;
+            Tuple<int, int> bounds = InputsParser.ParseBounds(s);
+            x_max = bounds.Item1;
+            y_max = bounds.Item2;
         }
 
         public string GetLostValue()
         {
-            return "LOST";
+            return _position.Lost?
+                "LOST":
+                string.Empty;
         }
 
         #endregion

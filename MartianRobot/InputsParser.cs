@@ -46,6 +46,19 @@ namespace MartianRobot
             return commands;
         }
 
+        public static Tuple<int,int> ParseBounds(string input)
+        {
+            string[] inputs = input.Split(" ");
+            bool firstPosition = true;
+            int x_position = 0;
+            int y_position = 0;
+            foreach (string s in inputs)
+            {
+                GetPosition(firstPosition, ref x_position, ref y_position, s);
+                firstPosition = !firstPosition;      
+            }
+            return new Tuple<int, int>(x_position, y_position);
+        }
 
         private static orientationTypes ParseOrientation(string orientation)
         {
