@@ -78,20 +78,21 @@ namespace MartianRobot
         {            
             if (firstPosition)
             {
-                x_position = int.Parse(s);
+                x_position = GetCoordinate(s);
             }
             else
             {
-                y_position = int.Parse(s);
+                y_position = GetCoordinate(s);
             }
-            if (x_position > 50)
+        }
+
+        private static int GetCoordinate(string coordinate)
+        {
+            if (int.TryParse(coordinate, out int result))
             {
-                x_position = 50;
+                return result;
             }
-            if (y_position > 50)
-            {
-                y_position = 50;
-            }
+            return 0;
         }
     }
 }

@@ -31,6 +31,8 @@ namespace MartianRobot
 
         private int x_max;
         private int y_max;
+        private const string LOST_STR = "LOST";
+        private const int MAX_BOUND = 50;
 
         #endregion
 
@@ -50,6 +52,8 @@ namespace MartianRobot
         public void SetInitialPosition(string s)
         {
             _position = InputsParser.ParsePosition(s);
+            _position.x = CheckCoordinatesBound(_position.x);
+            _position.y = CheckCoordinatesBound(_position.y);
         }
 
         public void ProcessCommands(string s)
@@ -82,14 +86,14 @@ namespace MartianRobot
         public void SetGridBounds(string s)
         {
             Tuple<int, int> bounds = InputsParser.ParseBounds(s);
-            x_max = bounds.Item1;
-            y_max = bounds.Item2;
+            x_max = CheckCoordinatesBound(bounds.Item1);
+            y_max = CheckCoordinatesBound(bounds.Item2);
         }
 
         public string GetLostValue()
         {
             return _position.Lost?
-                "LOST":
+                LOST_STR :
                 string.Empty;
         }
 
@@ -97,7 +101,10 @@ namespace MartianRobot
 
         #region Private
 
-
+        private int CheckCoordinatesBound(int coordinate)
+        {
+            return coordinate > MAX_BOUND ? MAX_BOUND : coordinate;
+        }
 
         #endregion
     }
