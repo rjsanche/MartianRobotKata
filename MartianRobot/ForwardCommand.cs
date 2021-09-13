@@ -8,7 +8,6 @@ namespace MartianRobot
 {
     public class ForwardCommand : ICommand
     {
-        private Position _position;
         public ForwardCommand()
         {
             
@@ -16,7 +15,14 @@ namespace MartianRobot
 
         public Position Execute(Position position)
         {
-            position.x = position.x + 1;
+            if (position.orientation == MartianRobotEngine.orientationTypes.E)
+            {
+                position.x = position.x + 1;
+            }
+            else if(position.orientation == MartianRobotEngine.orientationTypes.N)
+            {
+                position.y = position.y + 1;
+            }
             return position;
         }
     }

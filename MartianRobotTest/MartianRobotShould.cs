@@ -67,7 +67,7 @@ namespace MartianRobotTest
             //arrange
             MartianRobotEngine robot = new MartianRobotEngine();
             var expected = "2 1";
-            robot.SetInitialPosition("1 1 N");
+            robot.SetInitialPosition("1 1 E");
             robot.ProcessCommands("F");
             //act
             var result = robot.GetPosition();
@@ -75,5 +75,19 @@ namespace MartianRobotTest
             Assert.AreEqual(expected, result);
         }
 
+        [TestMethod]
+        public void WhenReceiveFInstructionAndOrientationNorthGoUp()
+        {
+            //arrange
+            MartianRobotEngine robot = new MartianRobotEngine();
+            var expected = "1 2";
+            robot.SetInitialPosition("1 1 N");
+            robot.ProcessCommands("F");
+            //act
+            var result = robot.GetPosition();
+            //assert
+            Assert.AreEqual(expected, result);
+
+        }
     }
 }
