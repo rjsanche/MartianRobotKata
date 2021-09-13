@@ -27,7 +27,16 @@ namespace MartianRobot
 
         private Position _position;
 
+        private Dictionary<instructionTypes, ICommand> _commandsDictionary;
+
         #endregion
+
+        public MartianRobotEngine()
+        {
+            _commandsDictionary = new Dictionary<instructionTypes, ICommand>();
+            _commandsDictionary.Add(instructionTypes.F, new ForwardCommand());
+
+        }
 
         #region Public methods
 
@@ -37,13 +46,14 @@ namespace MartianRobot
         }
 
         public void ProcessCommands(string s)
-        {
+        {            
             Queue<instructionTypes> commands = InputsParser.ParseCommands(s);
             while (commands.Count > 0)
             {
-                if (commands.Dequeue() == instructionTypes.F)
+                instructionTypes nextCommand = commands.Dequeue();
+                if(_commandsDictionary.ContainsKey(nextCommand))
                 {
-                    _position.x = _position.x + 1;
+                    _position = _commandsDictionary[nextCommand].Execute(_position);
                 }
             }
         }
